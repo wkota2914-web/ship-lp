@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="SHIPは、個人開発者のApp Store公開までを一緒に進めるサポートサービスです。" />
+  <title>SHIP | つくったアプリを、ちゃんと世に出す。</title>
+  <style>
+    :root{
+      --navy:#0B132B;
+      --blue:#2563EB;
+      --mist:#F5F7FA;
+      --line:#E6EAF0;
+      --text:#182033;
+      --muted:#667085;
+      --white:#FFFFFF;
+      --radius:22px;
+      --shadow:0 14px 40px rgba(11,19,43,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+      color:var(--text);
+      background:var(--white);
+      line-height:1.7;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,calc(100% - 40px));margin:auto}
+    header{
+      position:sticky;top:0;z-index:20;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(230,234,240,.7);
+    }
+    .nav{
+      min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+    }
+    .brand{font-size:27px;font-weight:850;letter-spacing:.12em;color:var(--navy)}
+    .brand span{color:var(--blue);letter-spacing:0}
+    .navlinks{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:700}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      border-radius:12px;padding:14px 22px;font-weight:800;
+      transition:.2s ease;border:1px solid transparent;
+    }
+    .btn-primary{background:var(--blue);color:white;box-shadow:0 10px 25px rgba(37,99,235,.22)}
+    .btn-primary:hover{transform:translateY(-1px);background:#1D4ED8}
+    .btn-secondary{border-color:var(--line);background:white}
+    .hero{
+      padding:90px 0 80px;
+      background:
+        radial-gradient(circle at 86% 34%,rgba(37,99,235,.11),transparent 24%),
+        linear-gradient(180deg,#fff 0%,#fbfcff 100%);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:70px;align-items:center}
+    .eyebrow{color:var(--blue);font-size:13px;font-weight:800;letter-spacing:.08em;margin-bottom:18px}
+    h1{font-size:clamp(42px,6vw,72px);line-height:1.12;letter-spacing:-.045em;color:var(--navy);margin:0 0 24px}
+    .lead{font-size:18px;color:var(--muted);max-width:600px;margin:0 0 32px}
+    .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+    .price-note{font-size:13px;color:var(--muted);margin-top:14px}
+    .visual{
+      min-height:430px;border-radius:36px;background:linear-gradient(150deg,#f8fbff,#eef4ff);
+      border:1px solid #edf1f7;position:relative;overflow:hidden;
+      display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)
+    }
+    .phone{
+      width:245px;height:410px;border-radius:42px;background:#0a0d13;padding:10px;
+      transform:rotate(8deg);box-shadow:0 28px 70px rgba(11,19,43,.24);
+    }
+    .screen{
+      height:100%;border-radius:34px;background:white;padding:24px 17px;
+      display:flex;flex-direction:column;gap:16px;
+    }
+    .notch{width:84px;height:22px;background:#080b10;border-radius:14px;margin:0 auto 8px}
+    .appcard{display:flex;align-items:center;gap:12px}
+    .appicon{
+      width:58px;height:58px;border-radius:15px;background:linear-gradient(145deg,#1d4ed8,#3b82f6);
+      color:white;font-size:28px;font-weight:900;display:flex;align-items:center;justify-content:center
+    }
+    .apptext b{display:block;color:var(--navy);font-size:14px}
+    .apptext span{font-size:11px;color:#98a2b3}
+    .mockshots{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .shot{height:175px;background:linear-gradient(#0f2f76,#1e5be0);border-radius:14px;padding:11px;color:white}
+    .shot small{font-size:8px;opacity:.8}
+    .shot div{height:8px;background:rgba(255,255,255,.8);border-radius:10px;margin-top:13px}
+    section{padding:90px 0}
+    .section-head{text-align:center;max-width:720px;margin:0 auto 52px}
+    .section-head h2{font-size:38px;line-height:1.25;color:var(--navy);margin:0 0 14px}
+    .section-head p{color:var(--muted);margin:0}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:white}
+    .icon{
+      width:44px;height:44px;border-radius:12px;background:#eff5ff;color:var(--blue);
+      display:flex;align-items:center;justify-content:center;font-weight:900;margin-bottom:18px
+    }
+    .card h3{margin:0 0 8px;color:var(--navy);font-size:18px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .flow{background:var(--mist)}
+    .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+    .step{padding:22px;background:white;border-radius:18px;border:1px solid var(--line)}
+    .step-num{color:var(--blue);font-weight:900;font-size:14px;margin-bottom:10px}
+    .step b{display:block;color:var(--navy);margin-bottom:6px}
+    .step p{font-size:13px;color:var(--muted);margin:0}
+    .pricing-wrap{
+      max-width:850px;margin:auto;border:1px solid var(--line);border-radius:28px;
+      padding:38px;display:grid;grid-template-columns:.8fr 1.2fr;gap:44px;align-items:center;
+      box-shadow:var(--shadow)
+    }
+    .price-label{font-size:14px;font-weight:800;color:var(--muted)}
+    .price{font-size:54px;font-weight:900;letter-spacing:-.04em;color:var(--blue);line-height:1.1}
+    .price small{font-size:16px;color:var(--text)}
+    .checks{display:grid;gap:10px;margin-bottom:24px}
+    .checks div:before{content:"✓";color:var(--blue);font-weight:900;margin-right:10px}
+    .faq{max-width:860px;margin:auto;display:grid;gap:12px}
+    details{border:1px solid var(--line);border-radius:16px;padding:18px 20px;background:white}
+    summary{font-weight:800;color:var(--navy);cursor:pointer}
+    details p{color:var(--muted);font-size:14px;margin:12px 0 0}
+    .cta{
+      background:var(--navy);color:white;border-radius:30px;padding:64px 30px;text-align:center
+    }
+    .cta h2{font-size:42px;margin:0 0 12px}
+    .cta p{color:#cfd6e6;margin:0 0 26px}
+    footer{padding:36px 0 50px;color:#98a2b3;font-size:13px}
+    .footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media (max-width:900px){
+      .navlinks a:not(.btn){display:none}
+      .hero{padding-top:62px}
+      .hero-grid{grid-template-columns:1fr;gap:44px}
+      .visual{min-height:390px}
+      .cards{grid-template-columns:1fr 1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      .pricing-wrap{grid-template-columns:1fr}
+    }
+    @media (max-width:600px){
+      .container{width:min(100% - 28px,1120px)}
+      .nav{min-height:66px}
+      .brand{font-size:23px}
+      .navlinks .btn{padding:10px 14px;font-size:12px}
+      h1{font-size:44px}
+      .hero{padding:54px 0 64px}
+      .cards,.steps{grid-template-columns:1fr}
+      section{padding:70px 0}
+      .section-head h2{font-size:31px}
+      .pricing-wrap{padding:26px}
+      .price{font-size:46px}
+      .cta h2{font-size:34px}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#top">SHIP<span>↗</span></a>
+    <nav class="navlinks">
+      <a href="#service">サービス内容</a>
+      <a href="#flow">流れ</a>
+      <a href="#price">料金</a>
+      <a class="btn btn-primary" href="#contact">無料で相談する</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">APP STORE LAUNCH SUPPORT</div>
+        <h1>つくったアプリを、<br>ちゃんと世に出す。</h1>
+        <p class="lead">SHIPは、個人開発者のApp Store公開までの設定・準備・申請を、一緒に進めるサポートサービスです。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">無料で相談する →</a>
+          <a class="btn btn-secondary" href="#service">サービスを見る</a>
+        </div>
+        <div class="price-note">初回モニター価格 29,800円（税込）</div>
+      </div>
+      <div class="visual" aria-label="App Store公開イメージ">
+        <div class="phone">
+          <div class="screen">
+            <div class="notch"></div>
+            <div class="appcard">
+              <div class="appicon">↗</div>
+              <div class="apptext"><b>Your App</b><span>Your Company</span></div>
+            </div>
+            <div class="mockshots">
+              <div class="shot"><small>Professional Support</small><div></div><div></div><div></div></div>
+              <div class="shot"><small>Smooth Release</small><div></div><div></div><div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="service">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">SUPPORT</div>
+        <h2>公開までの「分からない」を、一つずつ。</h2>
+        <p>アプリを作ったあとに必要になる設定や素材準備を整理し、審査提出まで一緒に進めます。</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="icon">⚙</div><h3>App Store Connect設定</h3><p>アプリ情報や各種設定を一緒に確認します。</p></article>
+        <article class="card"><div class="icon">ID</div><h3>基本設定の確認</h3><p>Bundle IDなど、公開に必要な設定を整理します。</p></article>
+        <article class="card"><div class="icon">▧</div><h3>スクリーンショット構成</h3><p>魅力が伝わるストア画像の構成を一緒に考えます。</p></article>
+        <article class="card"><div class="icon">Aa</div><h3>紹介文の作成サポート</h3><p>アプリの特徴が伝わる説明文を整理します。</p></article>
+        <article class="card"><div class="icon">✓</div><h3>公開ページ準備</h3><p>プライバシーポリシーやサポートページを準備します。</p></article>
+        <article class="card"><div class="icon">↗</div><h3>審査提出まで伴走</h3><p>必要な作業を整理し、提出まで一緒に進めます。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow" class="flow">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">FLOW</div>
+        <h2>公開までの流れ</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num">01</div><b>現状確認</b><p>現在のアプリの状態を確認。</p></div>
+        <div class="step"><div class="step-num">02</div><b>必要作業を整理</b><p>公開までに足りないものを洗い出します。</p></div>
+        <div class="step"><div class="step-num">03</div><b>設定・素材準備</b><p>画像・説明文・各種設定を準備。</p></div>
+        <div class="step"><div class="step-num">04</div><b>Connectへ登録</b><p>ストア情報を登録し提出前まで進めます。</p></div>
+        <div class="step"><div class="step-num">05</div><b>審査提出</b><p>内容を確認してApp Store審査へ。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="price">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">MONITOR PLAN</div>
+        <h2>まずは最初のリリースから。</h2>
+      </div>
+      <div class="pricing-wrap">
+        <div>
+          <div class="price-label">初回モニタープラン</div>
+          <div class="price">29,800<small>円（税込）</small></div>
+          <p style="color:var(--muted)">サービス改善のため、現在はモニター価格で提供しています。</p>
+        </div>
+        <div>
+          <div class="checks">
+            <div>App Store公開までのサポート</div>
+            <div>ストア情報・スクリーンショット構成相談</div>
+            <div>紹介文・公開ページ準備の相談</div>
+            <div>審査提出までの伴走</div>
+          </div>
+          <a class="btn btn-primary" style="width:100%" href="#contact">無料で相談する →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">FAQ</div>
+        <h2>よくある質問</h2>
+      </div>
+      <div class="faq">
+        <details><summary>初心者でも大丈夫ですか？</summary><p>はい。初めてApp Storeへ公開する個人開発者を想定しています。</p></details>
+        <details><summary>アプリがまだ完成していなくても相談できますか？</summary><p>相談できます。現在の状態を確認して、公開までに必要な作業を整理します。</p></details>
+        <details><summary>必ず審査に通りますか？</summary><p>Appleによる審査通過そのものを保証するサービスではありません。審査結果により追加修正が必要になる場合があります。</p></details>
+        <details><summary>リジェクトされた場合も相談できますか？</summary><p>可能です。審査内容を確認し、次に対応するポイントを整理します。</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="cta">
+        <h2>Build it. Ship it.</h2>
+        <p>アプリを作った。次は、世に出そう。</p>
+        <!-- TODO: hrefをGoogleフォーム / Calendly / LINE / X DMなどの相談先URLに変更 -->
+        <a class="btn btn-primary" href="mailto:hello@example.com?subject=SHIP%20%E7%84%A1%E6%96%99%E7%9B%B8%E8%AB%87">無料で相談する →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div class="brand" style="font-size:19px">SHIP<span>↗</span></div>
+    <div>© 2026 SHIP. All rights reserved.</div>
+  </div>
+</footer>
+</body>
+</html>
